@@ -3,7 +3,7 @@
 # subtitle: "Tidyverse and ggplot2 libraries"
 # author: "Dieter Baets"
 # institute: "Proefcentrum Hoogstraten"
-# date: "2022/01/28 (updated: `r Sys.Date()`)"
+# date: "2022/02/22 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -26,6 +26,8 @@ library(imager)
 
 # R WORKSHOP
 
+_____________________
+
 ## Tidyverse and ggplot libraries
 
 <br />
@@ -39,7 +41,9 @@ library(imager)
 
 Dieter Baets <br />
 Proefcentrum Hoogstraten <br />
-February 23th 2022
+February 23th, 2022 <br />
+<br />
+[Github](https://github.com/dbaets)
 
 
 ---
@@ -56,11 +60,7 @@ class: inverse
 
 4. Introduction to tidy data
 
-5. (Additional ggplot2 tweaking)
-
-6. (Additional table processing functions)
-
-7. Other packages to explore
+5. Other packages to explore
 
 
 ---
@@ -522,8 +522,15 @@ Data formatting and data handeling will be discussed later on, for now just read
 - read_tsv()
 - read_table()
 
+---
+class: inverse
+
+_________________
+
+# Demonstration
 
 ---
+class: inverse
 
 # Excersise
 
@@ -541,7 +548,7 @@ class: inverse
 # Additional ggplot tweeking
 - rename titles
 - facet graphing
-- scale colour brewer - nicer colours
+- scale [colour brewer](https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html) - nicer colours 
 
 
 ---
@@ -709,92 +716,288 @@ Multitude of R packages for data science
 
 * examples:
 
-* ggplot2
+  * ggplot2
 
-* dplyr
+  * dplyr
 
-* tidyr
+  * tidyr
 
-* readr
+  * readr
 
-* ...
+  * ...
 
 ---
+class: inverse
 
-# Aesthetic mapping
+# Grammar of data manipulation
 
-.pull-left[
-- color
-]
+ggplot: grammar of graphics -> similar *grammar of data manipulation*
+<br />
 
-.pull-right[
-]
+**tibble**
 
+* tibble as input (first argument)
+* function that perform one task
+* tibble as output
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+complex tasks can be expressed as sequence of simple verbs
 
 
 ---
 class: inverse
 
-# Datasets
+# Grammar of data manipulation
 
-* Oogst en sorteringsdataset paprika
+package **dplyr**
+<br />
 
-* demonstration dataset from NCBI's Eukaryte genome data
+5 essential verbs:
+* *`select()`*: select columns
+* *`mutate()`*: make new columns
+* *`filter()`*: select rows
+* *`arrange()`*: order rows
+* *`summarize()`*: summarize rows
 
-add tidyverse logo
+---
+class: inverse
 
+# Select columns: `select()`
+
+.pull-left[
+`tibble <- select(tibble, var_1, var_2, ...)`
+
+you can use helper verbs for variable selection:
+* `contains()`
+* `starts_with()`
+* `ends_with()`
+* `-`
+]
+.pull-right[
+![](WorkshopFigures/select.PNG)
+]
+
+---
+class: inverse
+
+# Make columns: `mutate()`
+
+.pull-left[
+`tibble <- mutate(tibble,` <br />
+`new_var_1 = expression_1,` <br />
+`new_var_2 = expression_2, ...)`
+
+Use '=', not `<-` <br />
+
+the expression should result in a vector or in one value
+]
+
+.pull-right[
+![](WorkshopFigures/mutate.PNG)
+]
+
+
+---
+class: inverse
+
+# Make columns: `filter()`
+
+.pull-left[
+`tibble <- filter(tibble, logical_variable)`
+
+logical variable:
+* type directly: c(T, F, T, T, F, F, F, ...)
+* create from variables:
+  * ==, !=, >, <, >=, <=, %in%
+  * ´is.na()´
+
+]
+
+.pull-right[
+![](WorkshopFigures/filter.PNG)
+]
+
+---
+class: inverse
+
+# Make columns: `arrange()`
+
+.pull-left[
+`tibble <- arrange(tibble, var_1, - var_2)`
+
+use '-' to sort in inverse order
+
+]
+
+.pull-right[
+![](WorkshopFigures/arrange.PNG)
+]
+
+---
+class: inverse
+
+# Make columns: `summarize()`
+
+.pull-left[
+`tibble <- summarize(tibble,` <br />
+ `aggregated_var = espression)`
+
+expression should result in one value:
+* `mean()`
+* `median()`
+* `sd()`
+* `sum()`
+
+]
+
+.pull-right[
+![](WorkshopFigures/summarize.PNG)
+]
+
+
+---
+class: inverse
+
+# Group-wise analysis
+
+you can add a grouping structure to a tibble:
+* computations within other verbs (e.g. `mutate()`, `summarize()`) will happen per group
+* verbs:
+  * `group_by()`: add grouping
+  * `ungroup()`: remove grouping
+* you can group by multiple variables simultaneously. The different groups will be combinations of the variable values
+
+
+---
+class: inverse
+
+# The pipe operator (`%>%`)
+
+read as: pass output of previous chunk as first argument of following chunk <br />
+<br />
+<br />
+f(x, y) can be written as x `%>%` f(y) <br />
+
+<br />
+advantages:
+* less typing
+* less redundancy (+ easier to change object names)
+* more readable code
+
+---
+class: inverse
+
+_______
+# Exercise
+
+1. **Import** de data uit file "sampledata.tsv" als een tibble
+2. **Filter** uit alle rijen waar de variable "nationality" of "bmi_group" een NA waarde bevatten. Deze rijen zijn missing en hebben we dus niet nodig. Laat alle andere variabele vallen buiten 'nationality' en 'bmi_group'. Sla het resultaat op in een nieuwe tibble: "sample_data_filtered".
+3. Start van vorige tibble en maak een summary ("sample_data_summary") waarin de hoeveelheid deelnemers wordt bepaald, gegroepeerd per nationaliteit en bmi groep.
+4. Maak van voorgaande summary een bar plot om te bekijken welke nationaliteiten een hoger aantal obese deelnemers had.
+
+---
+class: inverse
+
+_______________
+# 4. Introduction to tidy data
+
+
+---
+# Untidy data
+
+.pull-left[
+How would you make the following figure using ggplot2:
+* day on the x-axis
+* count on the y-axis (number of fruits)
+]
+
+.pull-right[
+![](WorkshopFigures/tabel1.PNG)
+]
+
+
+---
+# Untidy data
+
+.pull-left[
+**Plotting is impossible!!**
+<br />
+<br />
+
+Why? <br />
+
+* Number of fruits should be the variable name but is spread over multiple columns
+* Day should be a variable, but this is information shown in the column headers
+]
+
+.pull-right[
+![](WorkshopFigures/tabel1.PNG)
+]
+
+---
+# Tidy data
+
+.pull-left[
+What changed?
+<br />
+<br />
+
+1. the variable aantal_vruchten is now one column
+2. the variable dag is now a separate column
+3. values in all other columns are duplicated
+
+<br />
+
+* each row corresponds to one observation
+* each column corresponds to one variable
+
+]
+
+.pull-right[
+![](WorkshopFigures/tabel2.PNG)
+]
+
+
+---
+class: inverse
+# Tidying verbs
+
+.pull-left[
+Package 'tidyr':
+* `gather()`: make table tidy (wide to long)
+* `spread()`: make table untidy (long to wide)
+]
+
+.pull-right[
+`tibble <- gather(tibble, value = "variable_values",
+key = "variable_headers", var_1, var_2,...)`
+
+Input:
+1. the variables you want to gather into one variable
+2. the name of that new variable (value)
+3. the name of the new variable with the info from the headers (key)
+]
+
+---
+class: inverse
+# Why tidy data?
+
+easier to create ggplot visualisations
+<br />
+easier to manipulate
+<br />
+more scalable format (adidng more values is easy)
+
+
+---
+class: inverse
+
+__________
+
+# 5. Other tidyverse packages
+* *lubridate* = work with different time formats
+* *rvest* = scrabe the web for data
+* *purr* = functional programming
+* *stringr* = work with strings
 
 
 
