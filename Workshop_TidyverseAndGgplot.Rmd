@@ -84,8 +84,8 @@ class: inverse
 
 * Capability is expandable by importing packages
 
-  * more than 11 000 packages available through CRAN, Bioconductor, Github, ...
-  
+* more than 11 000 packages available through CRAN, Bioconductor, Github, ...
+
 * Most of the analysis are centered around data frames (= Excel spreadsheets or SQL tables)
 
 ---
@@ -166,29 +166,32 @@ class: inverse
 
 # Build your own ggplot graph
 
-a graph consists out of three main parts:
+[ggplot2-book.org](https://ggplot2-book.org/) for more information.
+<br />
+
+A graph consists out of **three** main parts:
 <br />
 <br />
 
 1. **DATA**
 
-  your dataset of interest
-  <br />
-  <br />
-  
+your dataset of interest
+<br />
+<br />
+
 2. **AEStetic mapping**
 
-  an esthetic is a visual dimension of your graph that can be used to communicate information <br />
-  (e.g. x-axis, y-axis, color, shape...)
-  <br />
-  <br />
-  
+an esthetic is a visual dimension of your graph that can be used to communicate information <br />
+(e.g. x-axis, y-axis, color, shape...)
+<br />
+<br />
+
 3. **GEOMs**
 
-  add a *layer* of geometric objects <br />
-  (e.g. points, lines, bars,...)
-  
-  
+add a *layer* of geometric objects <br />
+(e.g. points, lines, bars,...)
+
+
 ---
 
 # Build your own ggplot graph
@@ -209,35 +212,6 @@ ggplot(data=iris,
 ggplot(data=iris,
        aes(x=Sepal.Length,
            y=Petal.Length)) + 
-  geom_point()
-
-```
-]
-
-
-
----
-
-# Build your own ggplot graph
-
-.pull-left[
-```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
-ggplot(data=iris,
-       aes(x=Sepal.Length,
-           y=Petal.Length,
-           color = Species)) + #<<
-  geom_point()
-
-```
-]
-
-.pull-right[
-
-```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
-ggplot(data=iris,
-       aes(x=Sepal.Length,
-           y=Petal.Length, 
-           color = Species)) +
   geom_point()
 
 ```
@@ -291,71 +265,431 @@ control the display of all non-data elements of the plot <br />
 
 ---
 
-# Data
+# Aesthetic mapping
 
-Data formatting and data handeling will be discussed later on, for now just read in data using :
-- read_csv()
-- read_xlsx() from the readxl package
+.pull-left[
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length)) + 
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length)) + 
+  geom_point()
+
+```
+]
+
 
 ---
 
 # Aesthetic mapping
 
-cars
+.pull-left[
+- color
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           color = Species)) + #<<
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length, 
+           color = Species)) +
+  geom_point()
+
+```
+]
+
+---
+
+# Aesthetic mapping
+
+.pull-left[
+- color
+- shape
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           shape = Species)) + #<<
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length, 
+           shape = Species)) +
+  geom_point()
+
+```
+]
+
+---
+
+# Aesthetic mapping
+
+.pull-left[
+- color
+- shape
+- alpha
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           alpha = Species)) + #<<
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length, 
+           alpha = Species)) +
+  geom_point()
+
+```
+]
+
+---
+
+# Aesthetic mapping
+
+.pull-left[
+- color
+- shape
+- alpha
+- size
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           size = Species)) + #<<
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length, 
+           size = Species)) +
+  geom_point()
+
+```
+]
+
+---
+
+# Aesthetic mapping
+
+.pull-left[
+**Combination**
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           color = Species, #<<
+           size = Sepal.Width, #<<
+           alpha = Petal.Width)) + #<<
+  geom_point()
+
+```
+]
+
+.pull-right[
+
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris,
+       aes(x=Sepal.Length,
+           y=Petal.Length,
+           color = Species, 
+           size = Sepal.Width, 
+           alpha = Petal.Width)) +
+  geom_point()
+
+```
+]
+
+
+---
+
+# Geoms
+
+.pull-left[
+- geom_line()
+- geom_point()
+- geom_bar()
+- geom_boxplot()
+- geom_violin()
+- geom_ridgeline()
+- ...
+]
+
+.pull-right[
+![GGplot 2 cheatsheet](WorkshopFigures/cheatsheet_ggplot.PNG)
+
+]
+
+---
+# Building different layers
+.pull-left[
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species))
+
+```
+]
+.pull-right[
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species))
+
+```
+]
+
+---
+# Building different layers
+.pull-left[
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             alpha = 0.3)
+
+```
+]
+.pull-right[
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             alpha = 0.3)
+
+```
+]
+
+---
+
+# Data import
+
+Data formatting and data handeling will be discussed later on, for now just read in data using :
+- read_csv()
+- read_xlsx() from the readxl package (don't forget to add sheet name as parameter)
+- read_tsv()
+- read_table()
+
+
+---
+
+# Excersise
+
+1. Laad '*sampledata.tsv*' in <br />
+2. Bekijk de dataset en zijn variabelen <br />
+3. Visualiseer het aantal mannelijke en vrouwelijke deelnemers gebruik makend van een staafdiagram <br />
+4. Doe het zelfde voor de nationaliteit van de deelnemers <br />
+5. Maak een boxplot om de leeftijdsdistributie te visualiseren. Kan je met de 'fill' command een andere kleur aan de grafieken geven? <br />
+6. voeg aan de boxplot in punt 5 een extra laag toe met punten (geom_point()). Wat gebeurd er als je geom_jitter() gebruikt in plaats van geom_point? <br />
+7. **Extra:** Maak een density plot gebruik makend van de leeftijdsvariabele (age) van alle deelnemers. Kleur in volgens gender en maak een facet per nationaliteit.
+
+---
+class: inverse
+
+# Additional ggplot tweeking
+- rename titles
+- facet graphing
+- scale colour brewer - nicer colours
+
+
+---
+class: inverse
+
+# theme's
+
+Standard theme's are loaded when the *ggplot2* library is loaded.
+adding a layer using theme_XXXX() argument
+
+<br />
+<br />
+<br />
+
+or by creating own theme = pch theme
+
+```{r}
+theme_PCH_nolines <- function (base_size = 11,
+                               base_family = "",
+                               base_line_size = base_size/22, 
+                               base_rect_size = base_size/22) 
+{
+  theme_bw(base_size = base_size,
+           base_family = base_family,
+           base_line_size = base_line_size,
+           base_rect_size = base_rect_size) %+replace%
+    
+    theme(panel.border = element_blank(),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "grey70",
+                                   size = rel(1)),
+          axis.ticks = element_line(colour = "grey70", 
+                                    size = rel(0.5)),
+          legend.key = element_blank(),
+          strip.background = element_rect(fill = "white",
+                                          colour = "grey70",
+                                          size = rel(2)),
+          complete = TRUE)
+}
+```
+
+---
+# adding theme to graph
+
+.pull-left[
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter())
+
+```
+]
+.pull-right[
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter()) +
+  theme_PCH_nolines()
+
+```
+]
+
+---
+# adding theme to graph
+
+.pull-left[
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter())
+
+```
+]
+.pull-right[
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter()) +
+  theme_PCH_nolines()
+
+```
+]
+
+---
+# Changing colours
+
+.pull-left[
+```{r}
+primary_colours <- c("#28572A","#6BA13C","#19AFE6")
+```
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  scale_fill_manual(primary_colours) +
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter())
+
+```
+]
+.pull-right[
+```{r message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
+ggplot(data=iris) +
+  geom_boxplot(aes(x = Species,
+                   y = Sepal.Length,
+                   fill = Species)) + 
+  scale_fill_manual(values = primary_colours) +
+  geom_point(aes(x = Species,
+                 y = Sepal.Length),
+             position =  position_jitter()) +
+  theme_PCH_nolines()
+
+```
+]
 
 
 
 
 
 
+---
 
+class: inverse
 
+_____________________
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# 3. Table manipulation
 
 
 
@@ -375,15 +709,79 @@ Multitude of R packages for data science
 
 * examples:
 
-  * ggplot2
-  
-  * dplyr
-  
-  * tidyr
-  
-  * readr
-  
-  * ...
+* ggplot2
+
+* dplyr
+
+* tidyr
+
+* readr
+
+* ...
+
+---
+
+# Aesthetic mapping
+
+.pull-left[
+- color
+]
+
+.pull-right[
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
@@ -399,22 +797,15 @@ add tidyverse logo
 
 
 
----
-
-class: center
-
-# Hand seals (印)
-
-Press `h` or `?` to see the possible ninjutsu you can use in remark.js.
-
-![](https://upload.wikimedia.org/wikipedia/commons/7/7e/Mudra-Naruto-KageBunshin.svg)
 
 ---
 
-class: center, middle
+class: center, middle, inverse
 
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+## Dieter Baets - dieterbaets@gmail.com
 
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan). <br /> <br />
+The workshop contents is based on the 2018 University of Antwerp Tidyverse Workshop <br /> by Sander Wuyts and Stijn Wittouck.
+
